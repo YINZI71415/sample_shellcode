@@ -33,3 +33,22 @@ objdump -d ./hello | grep "[0-9a-f]" | grep -v "file" | cut -f2 -d: \
 
 ### 查看函数系统调用参数传递情况
  - man syscall ：使用linux 手册查看
+ 
+ 
+ 
+ ### Android  arm32 shellcode
+ - 文件 android32_CBshell.asm 回弹 shell
+ - 编译：使用NDK的 as 和 ld
+ ```
+arm-linux-androideabi-as ./xxxxx.asm -o test.o
+arm-linux-androideabi-ld ./test.o -o ./mmmm
+arm-linux-androideabi-objdump -d ../mmmm 
+
+ ```
+ - 注意： 不要使用 arm-linux-androideabi-objdump 提取 shellcode，arm使用的是大端，arm-linux-androideabi-objdump 提取的是小端
+ - shellcode 提取，在手机上运行编译好的二进制，利用 lldb 提取相关代码片段
+ 
+ 
+ ### Android arm64 shellcode
+ - TODO
+
